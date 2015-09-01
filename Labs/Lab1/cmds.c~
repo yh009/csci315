@@ -1,0 +1,26 @@
+/*Yuxuan Huang
+  csci315 prelab1*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc,char *argv[])
+{
+
+  printf("Enter char int float str\n");
+  if (argc != 5) {
+      printf("Err");
+      return 0;
+    }
+  else {
+    char the_char = *argv[1];
+    int the_int = strtol(argv[2],NULL,10);
+    float the_float =strtof(argv[3],NULL);
+    char *the_str = argv[4];
+  }
+  return 0;
+}
+
+  
+  
