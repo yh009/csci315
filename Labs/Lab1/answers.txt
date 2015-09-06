@@ -4,3 +4,13 @@
 (1.2) child process gets separate instance of global variable declared in parent process, 
 which means change of ‘num’ in one doesn’t affect ‘num’ in the other.
 
+(2.a) x,i are in data segment, because they are global variables.
+      pid,y,j are in stack segment, because they are local variables without being
+allocated manually.
+
+(2.b) (1)both data segment and stack segment of a parent process are copied over to child.
+      (2)changes made to data or stack are not seen by the parent. 
+         Parent and child have their own separate segments.
+
+(2.d) (1)if one process closes the file,the other still can read from it.
+      (2)no affect.
