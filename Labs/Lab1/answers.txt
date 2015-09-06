@@ -1,0 +1,6 @@
+//Yuxuan Huang
+//csci315 Lab1
+
+(1.2) child process gets separate instance of global variable declared in parent process, 
+which means change of ‘num’ in one doesn’t affect ‘num’ in the other.
+
