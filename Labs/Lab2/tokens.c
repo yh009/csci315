@@ -79,12 +79,10 @@ int main(void){
     
     if (pid > 0){/* parent process*/
         /*close the unused end of the pipe*/
+        close(fd[READ_END]);
+        close(fd2[WRITE_END]);
         while (1){
             
-            //printf("in parent write loop");
-            //fflush(stdout);
-            close(fd[READ_END]);
-            close(fd2[WRITE_END]);
             int length = strlen(write_msg)+1;
             printf("length:%d\n",length);
             
@@ -92,7 +90,7 @@ int main(void){
             printf("p to c write length:%d\n",length);
             Write(fd[WRITE_END],write_msg,length);
             printf("p to c write:%s\n",write_msg);
-            close(fd[WRITE_END]);
+            //close(fd[WRITE_END]);
             
             Read(fd2[READ_END],&num,4);
             printf("c to p read length:%d\n",num);
@@ -100,9 +98,10 @@ int main(void){
             Read(fd2[READ_END],&buff,num);
             printf("c to p receive:%s\n",buff);
 
-            close(fd2[READ_END]);
-            //close(fd[WRITE_END]);
+
         }
+        close(fd2[READ_END]);
+        close(fd[WRITE_END]);
     }
     
                   
@@ -113,28 +112,31 @@ int main(void){
         close(fd[WRITE_END]);
         close(fd2[READ_END]);
         /*read from the pipe*/
-        Read(fd[READ_END],&num,4);
-        printf("p to c receive length:%d\n",num);
-        
-        Read(fd[READ_END],read_msg,num);
-        printf("p to c reveive:%s\n",read_msg);
-        
-        token = strtok(read_msg,s);
-        while(token != NULL){
-            strcat(result,token);
-            strcat(result,s);
-            token = strtok(NULL, s);
-            //printf("result:%s\n",result);
+        while(1){
+            Read(fd[READ_END],&num,4);
+            printf("p to c receive length:%d\n",num);
+            
+            Read(fd[READ_END],read_msg,num);
+            printf("p to c reveive:%s\n",read_msg);
+            
+            token = strtok(read_msg,s);
+            while(token != NULL){
+                strcat(result,token);
+                strcat(result,s);
+                token = strtok(NULL, s);
+                //printf("result:%s\n",result);
+            }
+            printf("result:%s\n",result);
+            //close(fd[READ_END]);
+            int length2 = strlen(result)+1;
+            Write(fd2[WRITE_END],&length2,4);
+            printf("c to p write length:%d\n",length2);
+            Write(fd2[WRITE_END],result,length2);
+            printf("c to p write:%s\n",result);
+            
         }
-        printf("result:%s\n",result);
         close(fd[READ_END]);
-        int length2 = strlen(result)+1;
-        Write(fd2[WRITE_END],&length2,4);
-        printf("c to p write length:%d\n",length2);
-        Write(fd2[WRITE_END],result,length2);
-        printf("c to p write:%s\n",result);
         close(fd2[WRITE_END]);
-        //close(fd[READ_END]);
     }
     return 0;
 }
