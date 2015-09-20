@@ -1,0 +1,43 @@
+Yuxuan Huang
+
+(2.1)In function ‘main’:
+     warning: unused variable ‘status’
+     In function `SumExp':
+     (.text+0x86): undefined reference to `pow'
+     In function `main':
+     (.text+0x29d): undefined reference to `pthread_create'
+     (.text+0x31f): undefined reference to `pthread_join'
+
+(2.2)pow(3) link with -lm
+
+(2.3)summation.c: In function ‘main’:
+     summation.c:76: warning: unused variable ‘status’
+     /tmp/ccyyR4iC.o: In function `main':
+     summation.c:(.text+0x29d): undefined reference to `pthread_create'
+     summation.c:(.text+0x31f): undefined reference to `pthread_join'
+
+(3.1)main thread passed arguments by using a struct called thread_args.
+     When main creates a thread, it allocation some memory in heap for 
+     the struct, and has pointer to the variables in the struct.
+
+(3.2)calloc set the memory to zero when it intializing the memory. 
+     We want the values of the variables in the struct 'thread_args'
+     (Which are int and double data types) to be zero.
+
+(3.3)if a thread is in detached state, it can never be joined.
+     for this program,it should not created detached threads cause
+     the main would need the computation results from its threads.
+
+(3.4)main uses tstatus as a pointer to tags.The tstatus indicates 
+     which thread’s argument struct and the tags is a pointer which 
+     points to the arguments inside the struct. Main uses a for loop
+     for receiving results.
+
+(3.5)there is nothing printed out. None of the threads prints.
+
+(3.6)the child thread stops its current process and runs “/bin/ls”,
+     and the program ends.
+
+(5) I can’t. The termination time of the thread is gotten and printed
+    before it actually exit. 
+     
