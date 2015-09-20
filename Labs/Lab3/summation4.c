@@ -72,7 +72,7 @@ int main (int argc, char *argv[]) {
     
     gettimeofday(&start,NULL);
     time_t the_start = (time_t)&start;
-    printf("start time = %s",ctime(&the_start));
+    printf("start time = %s",ctime(the_start));
     
     pthread_attr_t attr;
     
@@ -154,7 +154,7 @@ int main (int argc, char *argv[]) {
     //end time
     gettimeofday(&end,NULL);
     time_t the_end = (time_t)&end;
-    printf("end time = %s",ctime(&the_end));
+    printf("end time = %s",ctime(the_end));
     
     long int usec = (end.tv_sec-start.tv_sec)*1000000+(end.tv_usec-start.tv_usec);
     //long int usec = end->tv_usec-start->tv_usec;
