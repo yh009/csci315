@@ -1,0 +1,22 @@
+Prelab 3
+=========
+
+Problem 1
+
+-> char-threads.c, pre-lab.txt
+
+Missing files: pre-lab.txt
+
+Points: 0/20
+
+
+Problem 2
+
+-> mytime.c
+
+Missing files: mytime.c
+
+Points: 0/10
+
+
+Total: 0
