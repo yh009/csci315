@@ -1,0 +1,16 @@
+Yuxuan Huang
+csci315 Lab5 prelab
+
+(2.1) Mutex provides mutual exclusion, which means at one point,only
+      one thread can work in the critical section.
+      Semaphore is a generalized mutex.It restricts the number of
+      simultaneous users of a shared resource up to a max number.
+
+(2.2) pthread_mutex_init initialize the mutex referred 
+      pthread_mutex_lock return with the referred mutex in the
+                         locked state with calling thread as its owner.
+      pthread_mutex_unlock release the mutex referred.mutex becomes
+                         available.
+      sem_init  initializes the unnamed semaphore.
+      sem_wait  decrements(locks) the semaphore referred.
+      sem_post  increments(unlocks) the semaphore referred.
