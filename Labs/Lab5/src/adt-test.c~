@@ -1,0 +1,24 @@
+//Yuxuan Huang
+#include <stdlib.h>
+#include <stdio.h>
+#include "circular-list.h" 
+
+int main(int argc, char* argv[]){
+  struct circular_list *l;
+  item p;
+  circular_list_create(l,3);
+  printf("list size:%i\n",l->size);
+  circular_list_insert(l,"a");
+  circular_list_insert(l,"b");
+  circular_list_insert(l,"c");
+  circular_list_insert(l,"d");
+  circular_list_remove(l,&p);
+  printf(p);
+  circular_list_remove(l,&p);
+  printf(p);
+  circular_list_remove(l,&p);
+  printf(p);
+  circular_list_remove(l,&p);
+  printf(p);
+  return 0;
+}

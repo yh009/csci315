@@ -1,0 +1,14 @@
+Yuxuan Huang
+
+(2.1)In function ‘main’:
+     warning: unused variable ‘status’
+     In function `SumExp':
+     (.text+0x86): undefined reference to `pow'
+     In function `main':
+     (.text+0x29d): undefined reference to `pthread_create'
+     (.text+0x31f): undefined reference to `pthread_join'
+
+(2.2)pow(3) link with -lm
+     pthread link with -pthread
+(2.3)In function ‘main’:
+     warning: unused variable ‘status’
