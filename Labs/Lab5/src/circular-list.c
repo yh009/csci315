@@ -19,7 +19,19 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
+#include <semaphore.h>
 #include "circular-list.h" 
+
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+//int pthread_mutex_init(&lock,NULL);
+//sem_t condc,condp;
+
+//sem_init(&condc,0,0);
+//sem_init(&condp,0,0);
+
+
 
 int circular_list_create(struct circular_list *l, int size) {
   l->buffer = calloc(size, sizeof(item));
@@ -31,42 +43,45 @@ int circular_list_create(struct circular_list *l, int size) {
 }
 
 int circular_list_insert(struct circular_list *l, item i) {
-  if(l->elems==0){
-    l->start=0;
-    l->end=0;
-    l->elems=l->elems+1;
-    l->buffer[l->end]=i;
-  }
-  else if(l->elems==l->size){
-    printf("list full\n");
+    pthread_mutex_lock(&lock);
+    if(l->elems==0){
+        l->start=0;
+        l->end=0;
+        l->elems=l->elems+1;
+        l->buffer[l->end]=i;
+    }
+    else if(l->elems==l->size){
+        printf("list full\n");
+    }
+    else{
+        int newEnd=(l->end+1)%(l->size);
+        l->buffer[newEnd]=i;
+        l->end=newEnd;
+        l->elems=l->elems+1;
+    }
+    pthread_mutex_unlock(&lock);
     return 0;
-  }
-  else{
-    int newEnd=(l->end+1)%(l->size);
-    l->buffer[newEnd]=i;
-    l->end=newEnd;
-    l->elems=l->elems+1;
-  }
-  return 0;
 }
 
 int circular_list_remove(struct circular_list *l, item *i) {
-  if(l->elems==1){
-    *i=l->buffer[l->start];
-    l->elems=l->elems-1;
-    l->buffer[l->start]=0;
-    l->start=-1;
-    l->end=-1;
-  }
-  else if(l->elems==0){
-    printf("empty\n");
+    pthread_mutex_lock(&lock);
+    if(l->elems==1){
+        *i=l->buffer[l->start];
+        l->elems=l->elems-1;
+        l->buffer[l->start]=0;
+        l->start=-1;
+        l->end=-1;
+    }
+    else if(l->elems==0){
+        printf("empty\n");
+        *i=0;
+    }
+    else{
+        *i=l->buffer[l->start];
+        l->buffer[l->start]=0;
+        l->elems=l->elems-1;
+        l->start=(l->start+1)%(l->size);
+    }
+    pthread_mutex_unlock(&lock);
     return 0;
-  }
-  else{
-    *i=l->buffer[l->start];
-    l->buffer[l->start]=0;
-    l->elems=l->elems-1;
-    l->start=(l->start+1)%(l->size);
-  }
-  return 0;
 }

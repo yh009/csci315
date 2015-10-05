@@ -21,6 +21,9 @@
 #include <stdio.h>
 #include <stdbool.h> 
 #include <unistd.h>
+#include <pthread.h>
+#include <time.h>
+#include <string.h>
 
 #include "circular-list.h" 
 
@@ -42,60 +45,122 @@
 // global variables -----------------------
 
 struct circular_list mylist;
+pthread_mutex_t the_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 
 // end of global variables ----------------
 
 void *producer (void *param) {
-  item i;
-  unsigned int seed = 1234;
+    item i;
+    unsigned int seed = time(NULL);
 
-  while (true) {
+    while (true) {
+        //pthread_mutex_lock(&the_mutex);
     // sleep for random period of time
-    usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX); 
+        long double d=(SCALE_FACTOR * rand_r(&seed) / RAND_MAX);
+        //below is the test for problem 2
+        //printf("producer sleep:%lf\n",d);
+        usleep(d);
     
     // generate a random number
-    i = (item) (((double) rand_r(&seed)) / RAND_MAX);
+        i = (item) (((double) rand_r(&seed)) / RAND_MAX);
 
-    if (circular_list_insert(&mylist, i) == -1) {
-      printf("PRODUCER: error condition\n");
-    } else {
-      printf("PRODUCER: produced value %lf\n", i);
+        if (circular_list_insert(&mylist, i) == -1) {
+            printf("PRODUCER: error condition\n");
+        } else {
+            printf("PRODUCER: produced value %lf\n", i);
+        }
+        //pthread_mutex_unlock(&the_mutex);
     }
-  }
+    //pthread_exit(0);
 }
 
 void *consumer (void *param) {
-  item i;
-  unsigned int seed = 999;
+    item i;
+    unsigned int seed = time(NULL);
 
-  while (true) {
-    // sleep for random period of time
-    usleep(SCALE_FACTOR * rand_r(&seed) / RAND_MAX);
+    while (true) {
+        //pthread_mutex_lock(&the_mutex);
+        // sleep for random period of time
+        long double d=(SCALE_FACTOR * rand_r(&seed) / RAND_MAX);
+        //below is the test for problem 2
+        //printf("consumer sleep:%lf\n",d);
+        usleep(d);
 
-    if (circular_list_remove(&mylist, &i) == -1) {
-      printf("CONSUMER: error condition\n");
-    } else {
-      printf("CONSUMER: consumed value %lf\n", i);
+        if (circular_list_remove(&mylist, &i) == -1) {
+            printf("CONSUMER: error condition\n");
+        } else {
+            printf("CONSUMER: consumed value %lf\n", i);
+        }
+        //pthread_mutex_unlock(&the_mutex);
     }
-  }
+    //pthread_exit(0);
 }
 
 int main (int argc, char *argv[]) {
+    int num_prod;
+    int num_cons;
+    int sleep_time;
+    int i,j;
+    
 
   // get command line arguments
+    if (argc < 4){
+        printf("usage: %s [num_prod][num_cons][sleep_time],incorrect input\n",argv[0]);
+        exit(-1);
+    }
+    
+    else if (atoi(argv[1])==0) {
+        printf("bad producer number\n");
+        exit(-1);
+    }
   
-  // if error in command line argument usage, terminate with helpful
-  // message
+    else if (atoi(argv[2])==0){
+        printf("bad consumer number\n");
+        exit(-1);
+    }
+    
+    else if (atoi(argv[3])==0){
+        printf("bad sleep time number\n");
+        exit(-1);
+    }
+    
+    else {
+        num_prod = atoi(argv[1]);
+        num_cons = atoi(argv[2]);
+        sleep_time = atoi(argv[3]);
+    
+        pthread_t prod[num_prod];
+        pthread_t cons[num_cons];
+    
+  // if error in command line argument usage, terminate with helpful message
   
   // initialize buffer
-  circular_list_create(&mylist, 20);
+        circular_list_create(&mylist, 20);
   
   // create producer thread(s)
+        for (i=0;i<num_prod;i++){
+            pthread_create(&prod[i],NULL,producer,NULL);
+    }
   
   // create consumer thread(s)
-  
+        for (j=0;j<num_cons;j++){
+            pthread_create(&cons[j],NULL,consumer,NULL);
+    }
+        /*
+        for (i=0;i<num_prod;i++){
+            pthread_join(prod[i],NULL);
+    }
+    
+        for (j=0;j<num_cons;j++){
+            pthread_join(cons[i],NULL);
+    }
+    */
   // sleep to give time for threads to run
+        usleep(1000000*sleep_time);
   
   // exit
-  return (0);
+        return (0);
+    }
+    return 0;
 }
