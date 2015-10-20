@@ -1,0 +1,66 @@
+Prelab 1: 30/30
+
+cmds.c -> 10/10
+cmdreverse.c -> 10/10
+myproc.c -> 10/10
+
+---
+
+Lab 1: 66/70
+
+Problem 1
+
+fix fork.c  -> 5/5
+answer 1.2  -> 5/5
+fork-wait.c -> 10/10
+
+Problem 2
+
+answers 2   -> 18/21
+- For 2d, there is an effect when one file reads from a shared descriptor. The stream position changes.
+Fork wrapper -> 1/4
+- Your wrapper immediately terminates the program regardless of fork()'s return value
+
+Problem 3
+
+catcount -> 25/25
+
+---
+
+Prelab 2: 27/30
+
+heap-test.c -> 15/15
+answers/pipe-test -> 12/15
+- Answer 1 is ambiguous. Answer 3 could be more comprehensive.
+
+---
+
+Lab 2: 60/70
+
+pipes-test.c -> 28/30
+- Test against the EOF character for the end of the stream, not '\0'.
+upper.c -> 15/15
+tokens.c -> 7/15
+- Doesn't work as expected.
+Makefile -> 10/10
+
+---
+
+Prelab 3: 26/30
+
+Threading Order -> 18/20
+- Your program outputs "-1693867258" occasionally.
+mytime.c        -> 8/10
+- Wouldn't compile for me without some editing. Had "*argv" vs "**argv" in main declaration.
+
+---
+
+Lab 3: 65/70
+
+Makefile -> 10/10
+Problem2 -> 10/10
+Summation -> 18/20
+- It's true that calloc will zero memory, but in this case, calloc is better than malloc because you don't have to manually specify the amount of memory you want.
+Summation4 -> 15/15
+Summation5 -> 12/15
+- The answer for the final deals with the race condition of shared memory.
