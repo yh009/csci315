@@ -24,6 +24,7 @@
 #include <pthread.h>
 #include <time.h>
 #include <string.h>
+#include <semaphore.h>
 
 #include "circular-list.h" 
 
@@ -46,13 +47,15 @@
 
 struct circular_list mylist;
 pthread_mutex_t the_mutex = PTHREAD_MUTEX_INITIALIZER;
+sem_t empty;
+sem_t full;
 
 
 // end of global variables ----------------
 
 void *producer (void *param) {
     item i;
-    unsigned int seed = time(NULL);
+    unsigned int seed = *((unsigned int*)param);
 
     while (true) {
         //pthread_mutex_lock(&the_mutex);
@@ -65,11 +68,13 @@ void *producer (void *param) {
     // generate a random number
         i = (item) (((double) rand_r(&seed)) / RAND_MAX);
 
+        sem_wait(&empty);
         if (circular_list_insert(&mylist, i) == -1) {
             printf("PRODUCER: error condition\n");
         } else {
             printf("PRODUCER: produced value %lf\n", i);
         }
+        sem_post(&full);
         //pthread_mutex_unlock(&the_mutex);
     }
     //pthread_exit(0);
@@ -77,7 +82,7 @@ void *producer (void *param) {
 
 void *consumer (void *param) {
     item i;
-    unsigned int seed = time(NULL);
+    unsigned int seed = *((unsigned int*)param);
 
     while (true) {
         //pthread_mutex_lock(&the_mutex);
@@ -87,11 +92,13 @@ void *consumer (void *param) {
         //printf("consumer sleep:%lf\n",d);
         usleep(d);
 
+        sem_wait(&full);
         if (circular_list_remove(&mylist, &i) == -1) {
             printf("CONSUMER: error condition\n");
         } else {
             printf("CONSUMER: consumed value %lf\n", i);
         }
+        sem_post(&empty);
         //pthread_mutex_unlock(&the_mutex);
     }
     //pthread_exit(0);
@@ -137,15 +144,21 @@ int main (int argc, char *argv[]) {
   
   // initialize buffer
         circular_list_create(&mylist, 20);
+        sem_init(&empty,0,20);
+        sem_init(&full,0,0);
   
   // create producer thread(s)
         for (i=0;i<num_prod;i++){
-            pthread_create(&prod[i],NULL,producer,NULL);
+            int *pid1 = malloc(sizeof(int));
+            *pid1 = i;
+            pthread_create(&prod[i],NULL,producer,pid1);
     }
   
   // create consumer thread(s)
         for (j=0;j<num_cons;j++){
-            pthread_create(&cons[j],NULL,consumer,NULL);
+            int *pid2 = malloc(sizeof(int));
+            *pid2 = j;
+            pthread_create(&cons[j],NULL,consumer,pid2);
     }
         /*
         for (i=0;i<num_prod;i++){
