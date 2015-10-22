@@ -1,0 +1,13 @@
+Prelab 7
+=========
+
+Philosopher and Main
+
+-> dp.c
+
+You missed the cast from a void* to a long long*.
+
+Points: 25/30
+
+
+Total: 25
