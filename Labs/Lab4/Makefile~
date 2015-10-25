@@ -1,0 +1,17 @@
+CC = gcc
+CFLAGS = -Wall
+EXECS = echod	echoreq	wrappers
+
+all: $(EXECS)
+
+echod: echod.c
+	$(CC) $(CFLAGS) echod.c -o echod
+echoreq: echoreq.c
+	$(CC) $(CFLAGS) echoreq.c -o echoreq
+wrappers: wrappers.c
+	$(CC) $(CFLAGS) wrappers.c -o wrappers
+
+.PHONY clean
+clean:
+	rm -rf $(EXECS) *.o
+

@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS = -Wall
+EXECS = summation
+
+all: $(EXECS)
+
+summation.o: summation.c
+	$(CC) $(CFLAGS) -c summation.c -o summation.o
+
+.PHONY: clean
+clean:
+	rm -rf $(EXECS) *.o

@@ -1,0 +1,9 @@
+Yuxuan Huang
+csci315 Lab4
+
+(4.1) fork just creates a copy of current process. In this lab, we used 
+      TCP sockets for inter process communication between two different 
+      processes, which are not a copy of each other. They have no parent-
+      child relationship.
+
+(4.2) 

@@ -1,0 +1,7 @@
+Yuxuan Huang
+csci315 lab5
+
+(3) rand_r need an unsigned integer argument seedp, which is created inside
+    each thread. Therefore the integer is stored on the private stack of 
+    each thread. Then rand_r and use this integer argument to ensure the state
+    is not shared between threads.

@@ -1,0 +1,45 @@
+Lab 4
+======
+
+Problem 1: wrappers
+
+-> wrappers.h, wrappers.c
+
+Points: 10/10
+
+
+Problem 2: Makefile
+
+-> Makefile
+
+Points: 5/5
+
+
+Problem 3: echoreq
+
+-> echod.c, echoreq.c
+
+Excellent. One point off because you didn't use your wrapper for accept(2).
+
+Points: 24/25
+
+
+Problem 4: Answers
+
+-> answers.txt
+
+For 3, pipes that you guys have seen can only be used if one process is a direct fork of another. Sockets can be used on the same host too.
+
+Points: 18/20
+
+
+Problem 5: Different Function
+
+-> echoreq2.c
+
+You used the correct function, but your program didn't run correctly.
+
+Points: 7/10
+
+
+Total: 64

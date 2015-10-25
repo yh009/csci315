@@ -1,0 +1,28 @@
+Yuxuan Huang 
+csci315 pre-lab4
+
+(P1) socket(2) and pipe(2) are both used in byte stream communications. 
+     But pipe(2) can only used in communication among localhost processes,while
+     sockets can extend beyond localhost. 
+     socket(2) and open(2) both return a file descriptor upon success.
+     But open(2) can’t be used in any communication among processes.
+
+(P2) 1. By using the ‘struct sockaddr_in’ to hold the other process’s address, 
+        one program addresses the other program for communication over a TCP socket.
+
+     2. When a socket is created, it exists in a name space but has no address 
+        assigned to it. bind(2) assigns the address specified by addr to the 
+        socket referred to by the file descriptor sockfd.
+  
+     3. connect(2) is used to connect the socket to the specified server address.
+ 
+     4. listen(2) marks the socket as passive and will be used to accept incoming
+        connection requests.
+
+     5. accept(2) extracts the first connection request on the queue for the listening
+        socket, creates a new connected socket and returns a new file descriptor referring
+        to that socket. 
+
+     6. We can use send(2) and recv(2) to send and receive message from the socket.
+        they are very much like read(2) and write(2) for pipes, except they have a 
+        flag argument.

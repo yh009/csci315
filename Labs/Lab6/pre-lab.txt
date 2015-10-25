@@ -1,0 +1,20 @@
+Yuxuan Huang
+Pre-lab 6
+
+(b) Here UDP socket is connectionless. Hence we can 
+    send message immediately.since we have no connection, the messages have 
+    to be addressed to their destination.
+    recvfrom() is used to receive message from a socket, the socket can be 
+    connectionless. 
+    sendto() is used to send message across a connectionless socket.
+    User can specify a destination address in recvfrom() and sendto().
+
+(c) Both TCP and UDP are protocols used for sending packets over the Internet.
+    TCP is connection-oriented protocol, while UDP is connectionless protocol.
+    TCP sends message in order, while UDP sends message no ordered.
+    TCP is heavyweight,while UDP is lightweight.
+    TCP reads data as data stream(no begin/end for packet),while UDP sends and 
+    read a packet as a whole.
+
+(e) every time i ran send_upd, the received pid increments by 1.
+

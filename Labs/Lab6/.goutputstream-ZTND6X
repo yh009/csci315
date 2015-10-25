@@ -1,0 +1,18 @@
+CC = gcc
+CFLAGS = -Wall
+EXECS = wrappers recv_udp send_udp
+
+all: $(EXECS)
+
+echod: echod.c
+	$(CC) $(CFLAGS) echod.c wrappers.o -o echod
+echoreq: echoreq.c
+	$(CC) $(CFLAGS) echoreq.c wrappers.o -o echoreq
+echoreq2: echoreq2.c
+	$(CC) $(CFLAGS) echoreq2.c wrappers.o -o echoreq2
+wrappers: wrappers.c
+	$(CC) $(CFLAGS) wrappers.c -c
+
+.PHONY: clean
+clean:
+	rm -rf $(EXECS) *.o

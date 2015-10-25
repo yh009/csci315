@@ -1,0 +1,64 @@
+//Yuxuan Huang
+//csci315 Lab7
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+pthread_mutex_t chop_lock[5];
+
+
+void napping(int t){
+    unsigned int seed = t;
+    int wait_sec = (rand_r(&seed)%t)+1;
+    long int wait_micro = wait_sec*1000000L;
+    printf("nap for %d seconds\n",wait_sec);
+    if(usleep(wait_micro)==-1){
+        perror("usleep");
+    }
+}
+
+
+
+void *Philosopher(void *id){
+    int pid = *((int*)id);
+    int special = pid+1;
+    
+    printf("Pilosopher %d is thinking.\n",pid);
+    napping(special);
+    printf("Pilosopher %d is hungry.\n",pid);
+    pthread_mutex_lock(&chop_lock[pid]);
+    printf("Pilosopher %d picked up chopstick on the left.\n",pid);
+    pthread_mutex_lock(&chop_lock[(pid+1)%5]);
+    printf("Pilosopher %d picked up chopstick on the right.\n",pid);
+    printf("Pilosopher %d is starting to eat.\n",pid);
+    napping(special);
+    printf("Pilosopher %d is done eating.\n",pid);
+    pthread_mutex_unlock(&chop_lock[pid]);
+    printf("Pilosopher %d put back chopstick on the left.\n",pid);
+    pthread_mutex_unlock(&chop_lock[(pid+1)%5]);
+    printf("Pilosopher %d put back chopstick on the right.\n",pid);
+    return 0;
+}
+
+int main(){
+    pthread_t pilosophers[5];
+    int i,j;
+    for (j=0;j<5;j++){
+      pthread_mutex_init(&chop_lock[j],NULL);
+    }
+    int fd = open("problem1.out",O_RDWR);
+    dup2(fd,1);
+    dup2(fd,2);
+    for (i=0;i<5;i++){
+        int *pid = malloc(sizeof(int));
+        *pid = i;
+        pthread_create(&pilosophers[i],NULL,Philosopher,pid);
+    }
+    usleep(1000000*20);
+    close(fd);
+    return 0;
+}
