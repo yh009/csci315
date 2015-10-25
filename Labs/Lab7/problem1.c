@@ -10,7 +10,7 @@
 
 pthread_mutex_t chop_lock[5];
 
-
+/*
 void napping(int t,int pid){
     unsigned int seed = pid;
     int value = rand_r(&seed);
@@ -18,18 +18,18 @@ void napping(int t,int pid){
     //printf("nap for %d microseconds\n",wait_microsec);
     usleep(wait_microsec);
 }
-
+*/
 
 
 
 
 void *Philosopher(void *id){
     int pid = *((int*)id);
-    int special = pid;
+    //int special = pid;
     while(1){
       printf("Pilosopher %d is thinking.\n",pid);
       fflush(stdout);
-      napping(1,special);
+      //napping(1,special);
       printf("Pilosopher %d is hungry.\n",pid);
       fflush(stdout);
       pthread_mutex_lock(&chop_lock[pid]);
@@ -40,7 +40,7 @@ void *Philosopher(void *id){
       fflush(stdout);
       printf("Pilosopher %d is starting to eat.\n",pid);
       fflush(stdout);
-      napping(1,special);
+      //napping(1,special);
       printf("Pilosopher %d is done eating.\n",pid);
       fflush(stdout);
       pthread_mutex_unlock(&chop_lock[pid]);
