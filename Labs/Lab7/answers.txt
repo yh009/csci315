@@ -15,4 +15,8 @@
     no preemption: Apply.
     ALL 4 conditions apply to this situation. Deadlock possible.
 
+2.1)Each pilosopher picks up the chopstick on his left first and nap for a random amount 
+    of time before go grab the other one on his right. In this situation, after every one
+    grabbed the chopstick on the left, the program can’t progress anymore and run in deadlock.
+
 
