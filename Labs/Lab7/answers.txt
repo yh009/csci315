@@ -1,0 +1,18 @@
+//Yuxuan Huang
+//Lab7
+
+1.1)From my observation, the program runs without getting into any deadlock. 
+
+1.2)Yes,the deadlock could happen. 
+    hold&wait: each philosopher go ahead and hold on to the chopstick on his left before
+               his get the other one on the right. If the right chopstick is taken, he
+               still hold on to what he has and wait.
+               APPLY.
+    mutual exclusion: Since i used mutex for the chopsticks. This apply.
+               APPLY.
+    circular wait: philosophers and the chopsticks are in circular lists.
+               APPLY.
+    no preemption: Apply.
+    ALL 4 conditions apply to this situation. Deadlock possible.
+
+
