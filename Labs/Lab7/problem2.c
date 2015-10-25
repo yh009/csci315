@@ -11,8 +11,8 @@
 pthread_mutex_t chop_lock[5];
 
 
-void napping(int t,int pid){
-    unsigned int seed = pid;
+void napping(int t,long long pid){
+    unsigned int seed = (unsigned int)pid;
     int value = rand_r(&seed);
     int wait_microsec = value%(t*1000000);
     printf("nap for %d microseconds\n",wait_microsec);
@@ -23,32 +23,32 @@ void napping(int t,int pid){
 
 
 void *Philosopher(void *id){
-    int pid = *((int*)id);
-    int special = pid;
+    long long pid = *((long long*)id);
+    long long special = pid;
     while(1){
-      printf("Pilosopher %d is thinking.\n",pid);
+      printf("Pilosopher %lld is thinking.\n",pid);
       fflush(stdout);
       //napping(3,special);
-      printf("Pilosopher %d is hungry.\n",pid);
+      printf("Pilosopher %lld is hungry.\n",pid);
       fflush(stdout);
       pthread_mutex_lock(&chop_lock[pid]);
-      printf("Pilosopher %d picked up chopstick on the left.\n",pid);
+      printf("Pilosopher %lld picked up chopstick on the left.\n",pid);
       fflush(stdout);
       napping(1,special);
-      special=special*100+123;
+      special=special*3+7;
       pthread_mutex_lock(&chop_lock[(pid+1)%5]);
-      printf("Pilosopher %d picked up chopstick on the right.\n",pid);
+      printf("Pilosopher %lld picked up chopstick on the right.\n",pid);
       fflush(stdout);
-      printf("Pilosopher %d is starting to eat.\n",pid);
+      printf("Pilosopher %lld is starting to eat.\n",pid);
       fflush(stdout);
       //napping(3,special);
-      printf("Pilosopher %d is done eating.\n",pid);
+      printf("Pilosopher %lld is done eating.\n",pid);
       fflush(stdout);
       pthread_mutex_unlock(&chop_lock[pid]);
-      printf("Pilosopher %d put back chopstick on the left.\n",pid);
+      printf("Pilosopher %lld put back chopstick on the left.\n",pid);
       fflush(stdout);
       pthread_mutex_unlock(&chop_lock[(pid+1)%5]);
-      printf("Pilosopher %d put back chopstick on the right.\n",pid);
+      printf("Pilosopher %lld put back chopstick on the right.\n",pid);
       fflush(stdout);
     }
     return 0;
@@ -61,10 +61,12 @@ int main(){
       pthread_mutex_init(&chop_lock[j],NULL);
     }
     for (i=0;i<5;i++){
-        int *pid = malloc(sizeof(int));
+        long long *pid = malloc(sizeof(long long));
         *pid = i;
         pthread_create(&pilosophers[i],NULL,Philosopher,pid);
     }
-    usleep(1000000*2000);
-    return 0;
+    
+    for (i = 0;i<5;i++){
+        pthread_join(pilosophers[i],NULL);
+    }
 }

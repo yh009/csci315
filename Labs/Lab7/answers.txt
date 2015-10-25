@@ -1,7 +1,7 @@
 //Yuxuan Huang
 //Lab7
 
-1.1)From my observation, the program runs without getting into any deadlock. 
+1.1)From my observation, the program gets into deadlock very quickly. 
 
 1.2)Yes,the deadlock could happen. 
     hold&wait: each philosopher go ahead and hold on to the chopstick on his left before
@@ -17,6 +17,9 @@
 
 2.1)Each pilosopher picks up the chopstick on his left first and nap for a random amount 
     of time before go grab the other one on his right. In this situation, after every one
-    grabbed the chopstick on the left, the program can’t progress anymore and run in deadlock.
+    grabbed the chopstick on the left, the program can’t progress anymore and run in
+    deadlock.
 
+3.1)No,there shouldn’t be deadlock.We took away one of the four essential conditions
+    of deadlock:circular wait.
 

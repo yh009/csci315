@@ -1,5 +1,0 @@
-P1: works
-
-P2: works
-
-P3: works? I am not sure what should i expect from the output.
