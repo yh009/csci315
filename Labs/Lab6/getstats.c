@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "readwrite.h"
+#include "wrappers.h"
 
 /*------------------------------------------------------------------------
  * Program:   getstats 
@@ -111,7 +113,7 @@ int main(int argc, char* argv[]) {
 
   // Close the socket. 
   
-  close(sd);
+  Close(sd);
   
   // Terminate the client program gracefully. 
   
