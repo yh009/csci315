@@ -1,0 +1,35 @@
+Yuxuan Huang
+Lab8
+
+1.1) Seg Fault occurs when a reference of a variable falls outside of the segment where that
+     variable resides, or when a write is attempted to a location that is in the illegal memory 
+     location.
+
+1.2) Compared with using bit map, the doubly-linked list is easier to implement. Doubly-linked list
+     also minimize external fragmentation. However, doubly-linked list cause possibly results in 
+     large internal fragmentation. 
+
+1.3) C programs call malloc and free frequently. Another stategy is using TLB for memory management.
+     I think using TLB is better becasue it involves less computation and easier get to the memory 
+     location we want. 
+
+1.4) External fragmentation is the unused memory blocks between portions of allocated memory.
+
+1.5) Internal fragmentation occurs when the memory allocator leaves extra space empty inside 
+     of a block of memory that has been allocated. 
+
+1.6) First fit allocates memory from the first large enough hole encountered in the memory space.
+     Pro: Fastest,least time for analyzing. 
+     Con: potentially large external fragmentation.
+
+1.7) Best fit allocates a process in the smallest block of unallocated memory in which it will fit.
+     Pro: Potentially least external fragmentation
+     Con: Slower than first fit
+          Less likely that another process can fit in the leftover.
+
+1.8) Worst fit allocates a process in the largest block of unallocated memory avaiable. 
+     Pro: Increase the chance that another process can use the leftover space.
+     Con: Slower than first fit
+          Potentially more external fragmentaion
+
+
