@@ -5,8 +5,6 @@ Producer/Consumer #1
 
 -> src/prodcons.c
 
-I'd give you an 11 for your use of "time(NULL)" if I could...
-
 Points: 10/10
 
 
@@ -14,9 +12,7 @@ Producer/Consumer #2
 
 -> answers.txt
 
-Missing files: ['answers.txt']
-
-Points: 0/10
+Points: 10/10
 
 
 Producer/Consumer #3
@@ -37,4 +33,4 @@ Make sure you check if there are *too many* arguments specified.
 Points: 18/20
 
 
-Total: 43
+Total: 53
