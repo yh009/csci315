@@ -1,0 +1,12 @@
+Yuxuan Huang
+csci315 Lab8
+
+1) instead of void *allocate(size_t size), i wrote three different allocate
+functions: void *allocate_first(size_t size);void allocate_best(size_t size); 
+void *allocate_worst(size_t size).
+
+allocate_first: find the first hole from the free_list that fits and allocate that hole.
+
+allocate_best: traverse through the free_list and find the smallest hole that fits.
+
+allocate_worst: traverse through the free_list and find the largest hole that fits.
