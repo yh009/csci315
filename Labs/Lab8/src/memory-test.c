@@ -34,11 +34,11 @@ int main(){
     print_list();
     
     printf("deallocate 2nd node\n");
-    deallocate(ptr[2]);
+    deallocate(ptr[1]);
     print_list();
     
-    printf("allocate 3nd node: size 50\n");
-    ptr[4]=allocate_first(50);
+    printf("allocate 3nd node: size 10\n");
+    ptr[4]=allocate_first(10);
     print_list();
     
     return 0;

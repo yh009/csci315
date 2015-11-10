@@ -139,8 +139,8 @@ int deallocate(void *ptr){
                 }
             }
         }
-        
-        dlist_find_remove(allocated_list,ptr);
+
+        dlist_find_remove(allocated_list,the_ptr);
         return 0;
     }
 }
