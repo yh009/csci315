@@ -38,4 +38,28 @@ csci315 Lab9
        }
                 
 
+(2.1) I think it’s not enough. It’s missing one detail:to augment integer r.
+      correct pseudo-code:
+      
+//Handle standard input
+//initialize custom memory allocator
 
+srandom(seed); // initialize PRNG
+ 
+int r=0;
+ 
+void *p = NULL;
+ 
+while (r < requests) {
+ 
+  s = a random number between 100 and 1000;
+ 
+  p = allocate(algorithm, s)
+  // this will require you to change your allocate function
+  // so that it accepts the algorithm parameter to select an
+  // allocation policy
+ 
+  deallocate(p);
+
+  r++;
+}
