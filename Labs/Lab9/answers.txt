@@ -63,3 +63,13 @@ while (r < requests) {
 
   r++;
 }
+
+(2.2) According to the results from (2.1), best-fit works best for my simulation.
+      Best-fit has the lowest average fragmentation among all three policies even
+      considering the margin of error.
+      My conjecture: since the formula i used to calculate average fragmentation is:
+      +++++++++++++++++++++++++++++++++++++++++++
+      ave_frag = (total_free-max_free)/total_free
+      +++++++++++++++++++++++++++++++++++++++++++
+      Thus,larger maximum free block leads to smaller average fragmentation.
+      It makes sense that Best-fit normally leaves the largest free holes.
