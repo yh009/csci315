@@ -57,7 +57,7 @@ void *allocate_best(size_t size){
         }
         free = free->next;
     }
-    if(sizeof(best)>size){
+    if(best->size >= size){
         ptr = best->data;
         dlist_add_back(allocated_list,ptr,size);
         dnode_setdata(best,best->data + size);
