@@ -1,0 +1,25 @@
+Lab 7
+======
+
+Problem 1: The Dining Philosphers
+
+-> problem1.c, answers.txt, problem1.out
+
+Points: 30/30
+
+
+Problem 2: Creating Deadlock
+
+-> problem2.c, answers.txt, problem2.out
+
+Points: 20/20
+
+
+Problem 3: Philosopher Behaviors
+
+-> problem3-1.c, problem3-2.c, answers.txt
+
+Points: 20/20
+
+
+Total: 70
