@@ -61,16 +61,20 @@ int execute(char** params){
     }
     
     else if(pid==0){//child
-        execvp(params[0],params);
-        
-        char* error = strerror(errno);
-        printf("ishell: %s:%s\n",params[0],error);
+        if(execvp(params[0],params)==-1){
+            char* error = strerror(errno);
+            printf("[ishell: program terminated abnormally] [%s]\n",error);
+            return -1;
+        }
         return 0;
     }
     
     else{//parent
         int childStatus;
-        waitpid(pid,&childStatus,0);
+        int c = waitpid(pid,&childStatus,0);
+        if(c!=-1){
+            printf("[ishell: program termiated successfully]\n");
+        }
         return 1;
     }
 }
