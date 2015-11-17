@@ -21,18 +21,29 @@ int main(int argc, char** argv){
     char *buf2;
     char *params[MAX_PARAMS+1];
     int two_cmd=0;
+    int count=0;
     
     while(1){
         printf("ishell>");
-        if(fgets(buf,50,stdin)==NULL){
-            break;
+        fgets(buf,50,stdin);
+        
+        if(buf[0]=='\n'){
+            count++;
+            if(count==2){
+                params[0] = "ls";
+                params[1] = (char *)NULL;
+                execute(params);
+                count=0;
+            }
+            continue;
         }
+        
         if(buf[strlen(buf)-1]== '\n'){
             buf[strlen(buf)-1] = '\0';
         }
-        if(buf[0]==0){
+        /*if(buf[0]==0){
             continue;
-        }
+        }*/
         
         int j;
         for(j=0;j<strlen(buf);j++){
@@ -40,7 +51,9 @@ int main(int argc, char** argv){
                 two_cmd=1;
                 break;
             }
+            two_cmd=0;
         }
+        
         if(two_cmd==1){
             buf1=strtok(buf,";");
             //printf("%s\n",buf1);
@@ -65,7 +78,7 @@ int main(int argc, char** argv){
         
         else{
             tokenize(buf,params);
-            printf("%s\n",params[0]);
+            //printf("%s\n",params[0]);
             if (strcmp(params[0],"exit")==0){
                 break;
             }
