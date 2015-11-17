@@ -1,7 +1,33 @@
 //Yuxuan Huang
 //Lab10
+/*
+ The additional functionalities that i added is going forward or backward from
+ current directory using 'cd' command.
+ The user prompt would be in this pattern:
 
+ ishell [current directory] >
 
+ When user wants to go to the parent directory of the current directory, simply type:
+
+ ishell [current directory] >cd ..
+
+ When user wants to go to a child directory of current directory, simply type:
+
+ ishell [current directory] >cd [child directory name]
+ 
+ user would also able to 'jump forward' or 'jump backward', means go to a child directory 
+ of a child directory or go to a parent of a parent,like:
+ ishell /yh009 >cd csci315/Labs/Lab10
+ or 
+ ishell /yh009/csci315/Labs/Lab10 > cd ../../..
+ 
+ !!!!!!Unlike linux shell, don't type the '~' in front of the directory!!!!!!
+
+ these functionalities are the same as the 'cd' command in linux terminal.
+ 
+ However, this is not a full version of linux shell 'cd'! User can't do certain 'shortcut' directory change
+ since i don't have '~' for them. User need to do every directory change manually.
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -22,9 +48,14 @@ int main(int argc, char** argv){
     char *params[MAX_PARAMS+1];
     int two_cmd=0;
     int count=0;
+    char cwd[100];
     
     while(1){
-        printf("ishell>");
+
+        memset(cwd,0,100);
+        getcwd(cwd,100);
+        
+        printf("ishell %s >",cwd);
         fgets(buf,50,stdin);
         
         if(buf[0]=='\n'){
@@ -102,6 +133,11 @@ void tokenize(char *cmd, char** params){
 }
 
 int execute(char** params){
+    if(strcmp(params[0],"cd")==0){
+        chdir(params[1]);
+        return 1;
+    }
+    
     pid_t pid = fork();
     
     if (pid == -1){
