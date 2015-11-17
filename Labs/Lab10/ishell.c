@@ -17,7 +17,10 @@ int execute(char** params);
 
 int main(int argc, char** argv){
     char buf[50];
+    char *buf1;
+    char *buf2;
     char *params[MAX_PARAMS+1];
+    int two_cmd=0;
     
     while(1){
         printf("ishell>");
@@ -28,14 +31,43 @@ int main(int argc, char** argv){
             buf[strlen(buf)-1] = '\0';
         }
         
-        tokenize(buf,params);
-        
-        if (strcmp(params[0],"exit")==0){
-            break;
+        int j;
+        for(j=0;j<strlen(buf);j++){
+            if(buf[j]==';'){
+                two_cmd=1;
+                break;
+            }
+        }
+        if(two_cmd==1){
+            buf1=strtok(buf,";");
+            //printf("%s\n",buf1);
+            buf2=strtok(NULL,";");
+            //printf("%s\n",buf2);
+            tokenize(buf1,params);
+            if (strcmp(params[0],"exit")==0){
+                break;
+            }
+            if(execute(params)==0){
+                break;
+            }
+            tokenize(buf2,params);
+            if (strcmp(params[0],"exit")==0){
+                break;
+            }
+            if(execute(params)==0){
+                break;
+            }
+            //two_cmd=0;
         }
         
-        if(execute(params)==0){
-            break;
+        else{
+            tokenize(buf,params);
+            if (strcmp(params[0],"exit")==0){
+                break;
+            }
+            if(execute(params)==0){
+                break;
+            }
         }
     }
     return 0;
@@ -63,7 +95,7 @@ int execute(char** params){
     else if(pid==0){//child
         if(execvp(params[0],params)==-1){
             char* error = strerror(errno);
-            printf("[ishell: program terminated abnormally] [%s]\n",error);
+            printf("[ishell: program terminated abnormally] [%d:%s]\n",errno,error);
             return -1;
         }
         return 0;
