@@ -30,6 +30,9 @@ int main(int argc, char** argv){
         if(buf[strlen(buf)-1]== '\n'){
             buf[strlen(buf)-1] = '\0';
         }
+        if(buf[0]==0){
+            continue;
+        }
         
         int j;
         for(j=0;j<strlen(buf);j++){
@@ -62,6 +65,7 @@ int main(int argc, char** argv){
         
         else{
             tokenize(buf,params);
+            printf("%s\n",params[0]);
             if (strcmp(params[0],"exit")==0){
                 break;
             }
