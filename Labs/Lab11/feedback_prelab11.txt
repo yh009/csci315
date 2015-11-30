@@ -1,0 +1,20 @@
+Prelab 11
+==========
+
+Problem 1: xxd Clone
+
+-> fdump.c, file_stat.c, read_dir.c, read_dir.h
+
+Your program doesn't check if you have too many parameters.
+
+Points: 14/15
+
+
+Problem 2: Answers
+
+-> prelab.txt
+
+Points: 15/15
+
+
+Total: 29
