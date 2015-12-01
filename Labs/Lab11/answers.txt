@@ -1,0 +1,22 @@
+Yuxuan Huang
+Lab11
+
+(3.1) changing the owner, changing the permission:
+      chmod [permissions] [path]
+      example:
+      chmod g+w Lab11 //add write permission to group’s access modes of the directory
+
+
+(3.2) mtime gets updated when you modify a file. Whenever you update content of a 
+      file or save a file the mtime gets updated.
+      example:
+      emacs echod.c //then modify the file, then save and exit
+
+(3.3) atime gets updated when you open a file but also when a file is used for other
+      operations like grep, sort, cat, head, tail and so on.
+      example:
+      cat echoed.c
+
+(3.4) For example, for a database table which will hold filenames of uploaded files,
+      it is helpful to know the maximum length of a filename to storage reserving and
+      partition.
