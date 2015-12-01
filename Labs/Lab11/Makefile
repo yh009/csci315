@@ -24,7 +24,7 @@ CC = gcc
 
 CFLAGS = -g -Wall
 
-EXE = file_stat read_dir fdump
+EXE = file_stat read_dir fdump traverse
 
 all: $(EXE)
 
@@ -45,6 +45,12 @@ hexdump.o: hexdump.c hexdump.h
 
 fdump: fdump.c hexdump.h hexdump.o
 	$(CC) $(CFLAGS) hexdump.o fdump.c -o fdump
+
+traverse: traverse.o
+	$(CC) $(CFLAGS) -o traverse traverse.o
+
+traverse.o: traverse.c
+	$(CC) -c $(CFLAGS) traverse.c
 
 clean:
 	/bin/rm -f *~ *.o core $(EXE)
