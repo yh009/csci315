@@ -1,0 +1,25 @@
+Lab 6
+======
+
+Problem 1: TCP Servers
+
+-> getfile.c, fileserver.c, getstats.c, Makefile
+
+You didn't missed some calls to your wrappers. -4
+Your program segfaults immediately. -9
+
+Points: 22/35
+
+
+Problem 2: UDP Servers
+
+-> Makefile, output2.txt, ugetfile.c, ufileserver.c, ugetstats.c
+
+Makefile does not build the new executables. -11
+I couldn't test your program properly. -8
+No output2.txt. - 12
+
+Points: 4/35
+
+
+Total: 26

@@ -1,0 +1,24 @@
+Lab 8
+======
+
+Problem 1 - answers.txt
+
+-> answers.txt
+
+1.2) Internal fragmentation's not a problem with your linked list implementation. -2
+1.3) The TLB's not particularly relevant to this problem because you're not dealing with virtual memory. -2
+
+Points: 26/30
+
+
+Problem 2: Memory Allocator
+
+-> Makefile, src/allocator.c, include/allocator.h, doc/designAPI.txt, src/memory-test*
+
+Your API doc is a little bare. -5
+You only have one test program, and it only tests first fit. -7
+
+Points: 58/70
+
+
+Total: 84

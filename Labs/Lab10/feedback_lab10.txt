@@ -1,0 +1,43 @@
+Lab 10
+=======
+
+Problem 1 - exec Spawning
+
+-> ishell.c
+
+Points: 30/30
+
+
+Problem 2 - Return Codes
+
+-> ishell.c
+
+Doesn't work correctly. When a program executes, will always say that it ran successfully even if it was supplied incorrect arguments.
+
+Points: 7/15
+
+
+Problem 3 - Two Commands
+
+-> ishell.c
+
+Points: 15/15
+
+
+Problem 4 - Implicit ls on Enter x2
+
+-> ishell.c
+
+Points: 15/15
+
+
+Problem 5 - Extra Feature
+
+-> ishell.c, submission.txt
+
+Nice work.
+
+Points: 25/25
+
+
+Total: 92
