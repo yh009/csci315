@@ -24,7 +24,7 @@ CC = gcc
 
 CFLAGS = -g -Wall
 
-EXE = file_stat read_dir fdump traverse
+EXE = file_stat read_dir fdump traverse sender receiver
 
 all: $(EXE)
 
@@ -51,6 +51,12 @@ traverse: traverse.o
 
 traverse.o: traverse.c
 	$(CC) -c $(CFLAGS) traverse.c
+
+sender: sender.c
+	$(CC) $(CFLAGS) sender.c -o sender -lpthread
+
+receiver: receiver.c
+	$(CC) $(CFLAGS) receiver.c -o receiver 
 
 clean:
 	/bin/rm -f *~ *.o core $(EXE)
