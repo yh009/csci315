@@ -1,0 +1,36 @@
+Lab 11
+=======
+
+Problem 1: file_stat.c
+
+-> file_stat.c, read_dir.c, read_dir.h
+
+Your permissions checking stuff and group name don't work entirely correctly.
+
+Points: 14/20
+
+
+Problem 2: Traversing Directories
+
+-> traverse.c
+
+Points: 20/20
+
+
+Problem 3: File Operations
+
+-> answers.txt
+
+Points: 8/8
+
+
+Problem 4: SemReader
+
+-> sender.c, receiver.c
+
+Missing files: ['sender.c', 'receiver.c']
+
+Points: 0/22
+
+
+Total: 42

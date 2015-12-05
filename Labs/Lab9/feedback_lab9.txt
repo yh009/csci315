@@ -1,0 +1,28 @@
+Lab 9
+======
+
+Problem 1 - Fragmentation Metrics
+
+-> answers.txt, include/allocator.h, src/allocator.c
+
+Points: 30/30
+
+
+Problem 2 - Creating the Evaluator
+
+-> answers.txt, src/frag-eval.c
+
+Your Makefile failed. -5
+The problem with the algorithm is that applications don't request memory and immediately release it.
+
+Points: 20/30
+
+
+Problem 3 - Statistics
+
+-> answers.txt, exp-results.pdf
+
+Points: 40/40
+
+
+Total: 90
