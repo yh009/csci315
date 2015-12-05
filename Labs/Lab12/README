@@ -1,0 +1,9 @@
+Our 4 additions are as follows...
+
+[1] 'print' command. USAGE: print [filename].   Displays a list of installed printers on the linux/linuxremote and you are asked to select a destination printer.
+
+[2] calculator (requires '-Y' flag for linuxremote / GUI enabled linux)
+
+[3] screenshot (requires '-Y' flag for linuxremote / GUI enabled linux)
+
+[4] cd (without '~' functionality)
