@@ -1,0 +1,18 @@
+Lab 12
+=======
+
+Problem 1: Combining Shells
+
+-> gshell.c
+
+Points: 70/70
+
+
+Problem 2: Introducing Pipes
+
+-> gshell.c
+
+Points: 30/30
+
+
+Total: 100
